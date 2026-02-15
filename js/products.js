@@ -31,19 +31,28 @@ form.addEventListener("submit", async (e) => {
 
   const productsRef = ref(db, "products");
 
-  // Check for duplicate SKU
+  // Check for FULL duplicate product
   let duplicate = false;
+
   await onValue(productsRef, (snapshot) => {
-    snapshot.forEach(snap => {
+    snapshot.forEach((snap) => {
       const p = snap.val();
-      if (p.sku.toLowerCase() === data.sku.toLowerCase() && snap.key !== editId) {
+
+      const sameProduct =
+        (p.name || "").toLowerCase() === data.name.toLowerCase() &&
+        (p.sku || "").toLowerCase() === data.sku.toLowerCase() &&
+        (p.category || "") === data.category &&
+        (p.batchNo || "").toLowerCase() === data.batchNo.toLowerCase() &&
+        (p.notes || "").toLowerCase() === (data.notes || "").toLowerCase();
+
+      if (sameProduct && snap.key !== editId) {
         duplicate = true;
       }
     });
   }, { onlyOnce: true });
 
   if (duplicate) {
-    alert("A product with this SKU already exists!");
+    alert("This exact product already exists!");
     return;
   }
 
@@ -60,6 +69,8 @@ form.addEventListener("submit", async (e) => {
       .catch(err => alert(err.message));
   }
 });
+
+
 
 // Load & display products
 onValue(ref(db, "products"), (snapshot) => {
