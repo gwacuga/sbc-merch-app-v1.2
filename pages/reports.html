@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/reports.css">
+</head>
+<body>
+
+<!-- Header with Back Button -->
+<div class="page-header">
+  <button onclick="goBack()" class="back-btn">⬅ Back</button>
+  <h2>Short Expiry Reports</h2>
+</div>
+
+<div id="redAlertBadge" class="alert-badge" style="display:none;">
+  ⚠️ Some products are about to expire!
+</div>
+
+<!-- MAIN FILTERS -->
+<div class="filters">
+  <div class="filter-group">
+    <label>Outlet</label>
+    <select id="reportOutlet">
+      <option value="all" selected>All Outlets</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Product</label>
+    <select id="reportProduct">
+      <option value="all" selected>All Products</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Start Date</label>
+    <input type="date" id="reportStartDate">
+  </div>
+
+  <div class="filter-group">
+    <label>End Date</label>
+    <input type="date" id="reportEndDate">
+  </div>
+
+  <button id="exportCsv" class="primary-btn">Export CSV</button>
+</div>
+
+<!-- MONTH / YEAR EXPORT -->
+<div class="month-report">
+  <div class="filter-group">
+    <label>Month</label>
+    <select id="reportMonth">
+      <option value="">All</option>
+      <option value="01">Jan</option><option value="02">Feb</option>
+      <option value="03">Mar</option><option value="04">Apr</option>
+      <option value="05">May</option><option value="06">Jun</option>
+      <option value="07">Jul</option><option value="08">Aug</option>
+      <option value="09">Sep</option><option value="10">Oct</option>
+      <option value="11">Nov</option><option value="12">Dec</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>Year</label>
+    <input type="number" id="reportYear" placeholder="YYYY" min="2000" max="2100">
+  </div>
+
+  <button id="exportMonthlyCsv" class="secondary-btn">
+    Export Monthly CSV
+  </button>
+</div>
+
+<!-- TABLE -->
+<div class="table-container">
+  <table id="reportTable">
+    <thead>
+      <tr>
+        <th>Outlet</th>
+        <th>Product</th>
+        <th>SKU</th>
+        <th>Batch</th>
+        <th>Expiries & Qty</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+
+    <tbody id="reportList">
+      <!-- JS injects rows here -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  function goBack() {
+    window.location.href = "../index.html";
+  }
+</script>
+
+<script type="module" src="../js/reports.js"></script>
+</body>
+</html>

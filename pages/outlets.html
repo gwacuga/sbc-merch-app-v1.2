@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Outlet Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/forms.css">
+</head>
+<body>
+
+<!-- Header -->
+<div class="page-header">
+  <button onclick="goBack()" class="back-btn">⬅ Back</button>
+  <h2>Outlet Management</h2>
+</div>
+
+<form id="outletForm">
+  <label>Outlet Name</label>
+  <input type="text" id="outletName" required>
+
+  <label>Location</label>
+  <input type="text" id="outletLocation">
+
+  <label>Notes (optional)</label>
+  <textarea id="outletNotes"></textarea>
+
+  <label>Listed Products</label>
+  <div id="productCheckboxList" class="product-checkboxes">
+    <p>Loading products...</p>
+  </div>
+
+  <button type="submit">Save Outlet</button>
+</form>
+
+<hr>
+
+<h3>Outlets List</h3>
+<div id="outletList"></div>
+
+<!-- Confirm Modal -->
+<div id="confirmModal" class="modal">
+  <div class="modal-content">
+    <p id="confirmMessage">Are you sure?</p>
+    <div class="modal-buttons">
+      <button id="confirmYes">Yes</button>
+      <button id="confirmNo">No</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function goBack() {
+    window.location.href = "../index.html";
+  }
+</script>
+
+<script type="module" src="../js/outlets.js"></script>
+</body>
+</html>

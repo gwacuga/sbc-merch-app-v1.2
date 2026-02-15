@@ -1,0 +1,203 @@
+body { 
+  font-family: Arial, sans-serif; 
+  background:#0d1117; 
+  color:#00ffff; 
+  padding:20px;
+  font-size:14px;
+}
+
+h2 { 
+  text-align:center; 
+  margin-bottom:15px; 
+}
+
+/* FILTERS */
+.filters, .month-report { 
+  display:flex; 
+  gap:10px; 
+  flex-wrap:wrap; 
+  margin-bottom:15px; 
+}
+
+.filter-group {
+  display:flex;
+  flex-direction:column;
+  flex:1 0 120px;
+}
+
+.filters label, 
+.month-report label { 
+  font-size:12px;
+  margin-bottom:4px;
+}
+
+.filters select,
+.filters input[type="date"],
+.filters button,
+.month-report select,
+.month-report input,
+.month-report button { 
+  padding:6px; 
+  border-radius:6px; 
+  border:1px solid #00ffff; 
+  background:#0d1117; 
+  color:#00ffff; 
+  cursor:pointer;
+}
+
+.filters button,
+.month-report button {
+  background:#00f0ff;
+  color:#001f2f;
+  font-weight:bold;
+  border:none;
+}
+
+.filters button:hover,
+.month-report button:hover { 
+  box-shadow:0 0 6px #00ffff; 
+}
+
+/* TABLE */
+.table-container { 
+  margin-top:20px; 
+  overflow-x:auto;
+}
+
+table { 
+  width:100%; 
+  border-collapse:collapse; 
+  font-size:14px; 
+}
+
+th, td { 
+  border:1px solid #00ffff; 
+  padding:6px; 
+  text-align:left; 
+  vertical-align:top; 
+}
+
+th { 
+  background:#001f2f; 
+}
+
+tr:hover { 
+  background:rgba(0,255,255,0.1); 
+}
+
+/* EXPIRY CHIPS (NEW) */
+.expiry-chip {
+  display:inline-block;
+  margin:2px 4px 2px 0;
+  padding:4px 6px;
+  border-radius:6px;
+  font-size:11px;
+  white-space:nowrap;
+  max-width:100%;
+}
+
+.exp-red {
+  background:rgba(255,60,60,0.25);
+  color:#ffb3b3;
+  box-shadow:0 0 6px rgba(255,60,60,0.6);
+}
+
+.exp-green {
+  background:rgba(0,255,140,0.25);
+  color:#b6ffdf;
+  box-shadow:0 0 6px rgba(0,255,140,0.6);
+}
+
+.exp-normal {
+  background:rgba(148,163,184,0.25);
+  color:#e5e7eb;
+}
+
+/* MOBILE CARD VIEW */
+@media(max-width:600px){
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display:block;
+    width:100%;
+  }
+
+  thead tr { 
+    display:none; 
+  }
+
+  tr {
+    margin-bottom:15px;
+    background:#001f2f;
+    padding:10px;
+    border-radius:12px;
+    box-shadow:0 0 8px rgba(0,255,255,0.5);
+    font-size:13px;
+  }
+
+  td {
+    border:none;
+    padding:6px 10px;
+    position:relative;
+    padding-left:45%;
+    margin-bottom:6px;
+    word-wrap:break-word;
+    overflow-wrap:anywhere;
+  }
+
+  td::before {
+    content:attr(data-label);
+    position:absolute;
+    left:10px;
+    width:40%;
+    font-weight:bold;
+    color:#00ffff;
+    font-size:12px;
+  }
+
+  /* Ensure expiry chips wrap nicely on phones */
+  .expiry-chip {
+    display:block;
+    margin:4px 0;
+    font-size:12px;
+  }
+}
+
+.alert-badge {
+  text-align: center;
+  background: #ff4c4c;
+  color: #001f2f;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 10px 0;
+  animation: flash 1.2s infinite;
+}
+
+@keyframes flash {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.3; }
+}
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  padding: 8px 14px;
+  border: none;
+  background: #111;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.back-btn:hover {
+  background: #333;
+}

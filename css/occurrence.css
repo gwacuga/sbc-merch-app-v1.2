@@ -1,0 +1,106 @@
+body {
+  font-family: Arial;
+  background:#0d1117;
+  color:#00ffff;
+  padding:20px;
+  font-size:14px;
+}
+
+h2,h3{
+  text-align:center;
+}
+
+form{
+  background:#001f2f;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 0 15px #00ffff;
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  margin-top:10px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:6px;
+  margin-top:4px;
+  border-radius:6px;
+  border:1px solid #00ffff;
+  background:#0d1117;
+  color:#00ffff;
+}
+
+button{
+  margin-top:12px;
+  padding:8px;
+  border:none;
+  border-radius:6px;
+  background:#00f0ff;
+  color:#001f2f;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  box-shadow:0 0 8px #00ffff;
+}
+
+.filters{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+  flex-wrap:wrap;
+}
+
+.card{
+  background:#001f2f;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:15px;
+  box-shadow:0 0 8px #00ffff;
+  word-wrap:break-word;
+}
+
+.card.high{
+  border-left:5px solid red;
+}
+
+.card.medium{
+  border-left:5px solid lime;
+}
+
+.card.low{
+  border-left:5px solid cyan;
+}
+
+.status-open{
+  color:red;
+  font-weight:bold;
+}
+
+.status-resolved{
+  color:lime;
+  font-weight:bold;
+}
+
+.actions{
+  margin-top:10px;
+}
+
+.deleteBtn{
+  background:#ff0044;
+  color:white;
+}
+
+.editBtn{
+  background:#00f0ff;
+}
+
+@media(max-width:600px){
+  body{
+    font-size:13px;
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GRN Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/forms.css" />
+</head>
+<body>
+
+<!-- Header with Back Button -->
+<div class="page-header">
+  <button onclick="goBack()" class="back-btn">⬅ Back</button>
+  <h2>GRN Register</h2>
+</div>
+
+<!-- GRN FORM -->
+<form id="grnForm">
+  <label>Outlet</label>
+  <input type="text" id="outletId" required />
+
+  <label>Reason for GRN</label>
+  <input type="text" id="reason" required />
+
+  <label>GRN Date</label>
+  <input type="date" id="date" required />
+
+  <label>GRN Document Image URL</label>
+  <input type="url" id="docUrl" placeholder="https://..." required />
+
+  <label>Notes (optional)</label>
+  <textarea id="notes"></textarea>
+
+  <button type="submit">Save GRN</button>
+</form>
+
+<hr>
+
+<h3>GRN Records</h3>
+<div id="grnList"></div>
+
+<!-- Confirm Modal -->
+<div id="confirmModal" class="modal">
+  <div class="modal-content">
+    <p id="confirmMessage">Are you sure?</p>
+    <div class="modal-buttons">
+      <button id="confirmYes">Yes</button>
+      <button id="confirmNo">No</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function goBack() {
+    window.location.href = "../index.html";
+  }
+</script>
+
+<script type="module" src="../js/grn.js"></script>
+</body>
+</html>

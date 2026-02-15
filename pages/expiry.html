@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Expiry Tracking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/expiry.css">
+</head>
+<body>
+
+<!-- Header with Back Button -->
+<div class="page-header">
+  <button onclick="goBack()" class="back-btn">⬅ Back</button>
+  <h2>Expiry Tracking</h2>
+</div>
+
+<form id="expiryForm">
+  <label>Outlet</label>
+  <select id="expiryOutlet" required>
+    <option value="" disabled selected>Select Outlet</option>
+  </select>
+
+  <label>Product</label>
+  <select id="expiryProduct" required>
+    <option value="" disabled selected>Select Product</option>
+  </select>
+
+  <label>SKU</label>
+  <input type="text" id="expirySKU" readonly>
+
+  <label>Batch Number</label>
+  <select id="expiryBatch" required>
+    <option value="" disabled selected>Select Batch No</option>
+  </select>
+
+  <label>Expiry Date</label>
+  <input type="date" id="expiryDate" required>
+
+  <label>Quantity</label>
+  <input type="number" id="expiryQuantity" min="1" required>
+
+  <label>Notes (optional)</label>
+  <textarea id="expiryNotes"></textarea>
+
+  <button type="submit">Save Expiry</button>
+</form>
+
+<hr>
+
+<h3>Expiry List</h3>
+<div class="table-container">
+  <table id="expiryTable">
+    <thead>
+      <tr>
+        <th>Outlet</th>
+        <th>Product</th>
+        <th>SKU</th>
+        <th>Batch No</th>
+        <th>Expiry Date</th>
+        <th>Quantity</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="expiryList"></tbody>
+  </table>
+</div>
+
+<!-- Confirm Modal -->
+<div id="confirmModal" class="modal">
+  <div class="modal-content">
+    <p id="confirmMessage">Are you sure?</p>
+    <div class="modal-buttons">
+      <button id="confirmYes">Yes</button>
+      <button id="confirmNo">No</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function goBack() {
+    window.location.href = "../index.html";
+  }
+</script>
+
+<script type="module" src="../js/expiry.js"></script>
+</body>
+</html>

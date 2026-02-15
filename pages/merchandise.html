@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Merchandise Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/forms.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0d1117;
+      color: #00ffff;
+      padding: 20px;
+    }
+    h2, h3 { text-align:center; margin-bottom:15px; }
+    select, input, button, textarea {
+      padding:6px;
+      margin-top:5px;
+      border-radius:6px;
+      border:1px solid #00ffff;
+      background:#0d1117;
+      color:#00ffff;
+      font-size:14px;
+    }
+    button {
+      cursor:pointer;
+      font-weight:bold;
+      margin-top:10px;
+      background:#00f0ff;
+      color:#001f2f;
+      border:none;
+    }
+    button:hover { box-shadow:0 0 8px #00ffff; }
+
+    .button-grid {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      margin-bottom:20px;
+    }
+    .nav-btn {
+      padding:10px 15px;
+      border-radius:8px;
+      background:#001f2f;
+      color:#00ffff;
+      text-decoration:none;
+      font-weight:bold;
+      text-align:center;
+      min-width:150px;
+    }
+    .nav-btn:hover { box-shadow:0 0 8px #00ffff; }
+
+    .kpi-card, .product-card { 
+      background:#001f2f;
+      padding:15px;
+      border-radius:12px;
+      margin-bottom:15px;
+      box-shadow:0 0 8px #00ffff;
+    }
+    .product-table {
+      width:100%;
+      border-collapse:collapse;
+      margin-top:10px;
+    }
+    .product-table th, .product-table td {
+      border:1px solid #00ffff;
+      padding:6px;
+      text-align:left;
+    }
+
+    .finish-btn{
+  margin-top:15px;
+  padding:10px 20px;
+  background:#111;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* Finish Merchandising Modal */
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  
+  justify-content: center;
+  align-items: center;
+  padding: 10px; /* ensures content never touches screen edges */
+  box-sizing: border-box;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: #001f2f;
+  color: #00ffff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px; /* fits smaller screens */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.modal-content p {
+  font-size: 14px;
+  margin: 10px 0 20px;
+}
+
+.modal-actions {
+  
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#cancelFinish {
+  background: #333;
+  color: #00ffff;
+}
+
+#confirmFinish {
+  background: #00ffff;
+  color: #001f2f;
+}
+
+@media(max-width: 500px){
+  .modal-content {
+    max-width: 100%; /* take almost entire width on small screens */
+    padding: 15px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--toast-bg);
+  color: var(--toast-text);
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  max-width: 90vw;
+  width: fit-content;
+  text-align: center;
+  z-index: 2000;
+  opacity: 0;
+  transition: all 0.35s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* Visible state */
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Auto adapt to system theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --toast-bg: #00ffff;
+    --toast-text: #001f2f;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --toast-bg: #001f2f;
+    --toast-text: #00ffff;
+  }
+}
+
+.toast.error {
+  background: #ff3b3b;
+  color: white;
+  font-weight: bold;
+}
+
+
+
+
+.finish-btn:hover{
+  background:#333;
+}
+
+    .product-table th { background:#001f2f; }
+    .activate-btn { background:#00ff44; color:#001f2f; font-weight:bold; border:none; padding:4px 8px; border-radius:6px; }
+    .deactivate-btn { background:#ff0044; color:white; font-weight:bold; border:none; padding:4px 8px; border-radius:6px; }
+    .activate-btn:hover, .deactivate-btn:hover { box-shadow:0 0 6px #00ffff; }
+  </style>
+</head>
+<body>
+
+<h2>Merchandise Hub</h2>
+
+<!-- Back Button -->
+<a href="../index.html" class="nav-btn" style="margin-bottom:15px; display:inline-block;">⬅ Back to Home</a>
+
+<!-- Select Outlet -->
+<div>
+  <label for="merchandiseOutlet">Select Outlet:</label>
+  <select id="merchandiseOutlet">
+    <option value="" disabled selected>Select Outlet</option>
+  </select>
+</div>
+
+<!-- KPIs Checklist -->
+<h3>My KPIs Checklist</h3>
+<table class="kpi-table">
+  <tbody>
+    <tr>
+      <td><label><input type="checkbox" id="kpiStockCheck"> Stock Availability Check</label></td>
+      <td><label><input type="checkbox" id="kpiSortingGRN"> Sorting GRN</label></td>
+      <td><label><input type="checkbox" id="kpiFefo"> Implementing Fefo</label></td>
+    </tr>
+    <tr>
+      <td><label><input type="checkbox" id="kpiPrices"> Aligning Prices</label></td>
+      <td><label><input type="checkbox" id="kpiOrderFollow"> Order Follow Up</label></td>
+      <td><label><input type="checkbox" id="kpiStockCompleted"> Stock Check Completed</label></td>
+    </tr>
+    <tr>
+      <td><label><input type="checkbox" id="kpiShelfPlan"> Shelf Plano Correct</label></td>
+      <td><label><input type="checkbox" id="kpiPromoCheck"> Promotions Checked</label></td>
+      <td><label><input type="checkbox" id="kpiCompetitor"> Check Competitor Activity</label></td>
+    </tr>
+    <tr>
+      <td><label><input type="checkbox" id="kpiDamage"> Check for Damage</label></td>
+      <td><label><input type="checkbox" id="kpiExpiry"> Check for Product Expiry</label></td>
+      <td><label><input type="checkbox" id="kpiShelfCleaning"> Shelf Cleaning</label></td>
+    </tr>
+  </tbody>
+</table>
+
+<button id="finishMerchandising" class="finish-btn">
+  Finish Merchandising
+</button>
+
+
+<!-- Quick Action Buttons -->
+<div class="button-grid">
+  <a href="#" id="merchAddExpiry" class="nav-btn">⏳ Add Expiry</a>
+  <a href="#" id="merchAddOccurrence" class="nav-btn">⚡ Add Occurrence</a>
+  <a href="#" id="merchAddGRN" class="nav-btn">🧾 Add GRN</a>
+  <a href="#" id="merchViewAnalysis" class="nav-btn">📈 View Analysis</a>
+  <a href="#" id="merchViewReports" class="nav-btn">📑 View Reports</a>
+  <a href="#" id="merchViewExpiries" class="nav-btn">⏳ View Expiries</a>
+</div>
+
+<!-- Products Table (no card, no actions) -->
+<h3>Products for this Outlet</h3>
+<table class="product-table" id="merchProductsTable">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>SKU</th>
+      <th>Batch</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Products will be injected here -->
+  </tbody>
+</table>
+
+<div id="finishModal" class="modal">
+  <div class="modal-content">
+    <h3>Finish Merchandising?</h3>
+    <p>This will reset KPI progress for this outlet.</p>
+
+    <div class="modal-actions">
+      <button id="cancelFinish">Cancel</button>
+      <button id="confirmFinish">Finish</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+
+
+
+<script type="module" src="../js/merchandise.js"></script>
+</body>
+</html>

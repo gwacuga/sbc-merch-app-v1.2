@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/products.css">
+</head>
+<body>
+
+<!-- Header with Back Button -->
+<div class="page-header">
+  <button onclick="goBack()" class="back-btn">⬅ Back</button>
+  <h2>Product Management</h2>
+</div>
+
+<form id="productForm">
+  <label>Product Name</label>
+  <input type="text" id="productName" required>
+
+  <label>SKU</label>
+  <input type="text" id="productSKU" required>
+
+  <label>Category</label>
+  <select id="productCategory" required>
+    <option value="" disabled selected>Select Category</option>
+    <option value="Soda">Soda</option>
+    <option value="Energy Drink">Energy Drink</option>
+    <option value="Tonic Water">Tonic Water</option>
+  </select>
+
+  <label>Batch Number</label>
+  <input type="text" id="productBatch" required>
+
+  <label>Notes (optional)</label>
+  <textarea id="productNotes"></textarea>
+
+  <button type="submit">Save Product</button>
+</form>
+
+<hr>
+
+<h3>Product List</h3>
+<div class="table-container">
+  <table id="productTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>SKU</th>
+        <th>Category</th>
+        <th>Batch No</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="productList"></tbody>
+  </table>
+</div>
+
+<!-- Confirm Modal -->
+<div id="confirmModal" class="modal">
+  <div class="modal-content">
+    <p id="confirmMessage">Are you sure?</p>
+    <div class="modal-buttons">
+      <button id="confirmYes">Yes</button>
+      <button id="confirmNo">No</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function goBack() {
+    window.location.href = "../index.html";
+  }
+</script>
+
+<script type="module" src="../js/products.js"></script>
+
+</body>
+</html>

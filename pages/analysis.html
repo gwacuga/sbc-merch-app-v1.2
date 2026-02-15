@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Merchandising Analysis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/analysis.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- Header with Back Button -->
+<div class="page-header">
+  <button onclick="goBack()" class="back-btn">⬅ Back</button>
+  <h2>Merchandising Analysis</h2>
+</div>
+
+<!-- Filters -->
+<div class="filters">
+  <label>Outlet</label>
+  <select id="analysisOutlet">
+    <option value="all" selected>All Outlets</option>
+  </select>
+
+  <label>Product</label>
+  <select id="analysisProduct">
+    <option value="all" selected>All Products</option>
+  </select>
+
+  <label>Start Date</label>
+  <input type="date" id="analysisStartDate">
+
+  <label>End Date</label>
+  <input type="date" id="analysisEndDate">
+
+  <button id="exportCsv">Export CSV</button>
+</div>
+
+<!-- Cards -->
+<div class="cards-container">
+  <div class="card" id="nearExpiryCard">
+    <h3>Near Expiry Items</h3>
+    <ul id="nearExpiryList"></ul>
+  </div>
+  <div class="card" id="stockSummaryCard">
+    <h3>Stock Summary</h3>
+    <ul id="stockSummaryList"></ul>
+  </div>
+</div>
+
+<!-- Charts -->
+<div class="charts-container">
+  <div class="chart-card">
+    <h3>Stock by Category</h3>
+    <canvas id="categoryChart"></canvas>
+  </div>
+  <div class="chart-card">
+    <h3>Outlet Performance</h3>
+    <canvas id="outletChart"></canvas>
+  </div>
+</div>
+
+<!-- Table -->
+<h3>Detailed Stock Table</h3>
+<div class="table-container">
+  <table id="analysisTable">
+    <thead>
+      <tr>
+        <th>Outlet</th>
+        <th>Product</th>
+        <th>SKU</th>
+        <th>Batch</th>
+        <th>Quantity</th>
+        <th>Expiry Dates</th>
+      </tr>
+    </thead>
+    <tbody id="analysisList"></tbody>
+  </table>
+</div>
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+  function goBack() {
+    window.history.back();
+    // OR use specific page:
+    // window.location.href = "../index.html";
+  }
+</script>
+
+<script type="module" src="../js/analysis.js"></script>
+</body>
+</html>

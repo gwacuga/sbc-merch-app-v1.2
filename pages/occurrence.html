@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Occurrence Intelligence</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/occurrence.css">
+</head>
+<body>
+<body>
+
+<!-- BACK BUTTON -->
+<button id="backBtn" style="
+  margin-bottom:15px;
+  padding:6px 12px;
+  border:none;
+  border-radius:6px;
+  background:#ff0044;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+">← Back</button>
+
+<h2>Field Occurrence Intelligence</h2>
+
+<!-- FORM -->
+<form id="occurrenceForm">
+  <!-- form fields as before -->
+</form>
+
+<hr>
+
+<h3>Occurrences</h3>
+
+<div class="filters">
+  <select id="filterOutlet">
+    <option value="all">All Outlets</option>
+  </select>
+
+  <select id="filterStatus">
+    <option value="all">All Status</option>
+    <option value="Open">Open</option>
+    <option value="Resolved">Resolved</option>
+  </select>
+</div>
+
+<div id="occurrenceList"></div>
+
+<script type="module" src="../js/occurrence.js"></script>
+
+<script>
+  // BACK BUTTON LOGIC
+  document.getElementById("backBtn").addEventListener("click", () => {
+    window.history.back(); // goes back to previous page
+  });
+</script>
+</body>
+
+<h2>Field Occurrence Intelligence</h2>
+
+<!-- FORM -->
+<form id="occurrenceForm">
+
+  <label>Outlet</label>
+  <select id="occurrenceOutlet" required>
+    <option value="" disabled selected>Select Outlet</option>
+  </select>
+
+  <label>Product (Optional)</label>
+  <select id="occurrenceProduct">
+    <option value="">None</option>
+  </select>
+
+  <label>Occurrence Type</label>
+  <select id="occurrenceType" required>
+    <optgroup label="Stock Issues">
+      <option value="Out of Stock">Out of Stock</option>
+      <option value="Low Stock">Low Stock</option>
+      <option value="Overstock">Overstock</option>
+      <option value="Damaged Product">Damaged Product</option>
+      <option value="Near Expiry Found">Near Expiry Found</option>
+    </optgroup>
+
+    <optgroup label="Outlet Issues">
+      <option value="Outlet Closed">Outlet Closed</option>
+      <option value="Outlet Refused Order">Outlet Refused Order</option>
+      <option value="Space Not Allocated">Space Not Allocated</option>
+    </optgroup>
+
+    <optgroup label="Competitor Activity">
+      <option value="Competitor Promotion">Competitor Promotion</option>
+      <option value="Competitor Price Drop">Competitor Price Drop</option>
+      <option value="New Competitor Product">New Competitor Product</option>
+    </optgroup>
+
+    <optgroup label="Marketing Issues">
+      <option value="POS Missing">POS Material Missing</option>
+      <option value="Branding Damaged">Branding Damaged</option>
+      <option value="Display Removed">Display Removed</option>
+    </optgroup>
+  </select>
+
+  <label>Severity</label>
+  <select id="occurrenceSeverity">
+    <option value="Low">Low</option>
+    <option value="Medium">Medium</option>
+    <option value="High">High</option>
+  </select>
+
+  <label>Date</label>
+  <input type="date" id="occurrenceDate" required>
+
+  <label>Description</label>
+  <textarea id="occurrenceDescription" required></textarea>
+
+  <label>Action Taken</label>
+  <textarea id="occurrenceAction"></textarea>
+
+  <label>Status</label>
+  <select id="occurrenceStatus">
+    <option value="Open">Open</option>
+    <option value="Resolved">Resolved</option>
+  </select>
+
+  <button type="submit">Save Occurrence</button>
+</form>
+
+<hr>
+
+<h3>Occurrences</h3>
+
+<div class="filters">
+  <select id="filterOutlet">
+    <option value="all">All Outlets</option>
+  </select>
+
+  <select id="filterStatus">
+    <option value="all">All Status</option>
+    <option value="Open">Open</option>
+    <option value="Resolved">Resolved</option>
+  </select>
+</div>
+
+<div id="occurrenceList"></div>
+
+<script type="module" src="../js/occurrence.js"></script>
+
+</body>
+</html>
