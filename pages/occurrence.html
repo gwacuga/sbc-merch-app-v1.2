@@ -2,148 +2,278 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Occurrence Intelligence</title>
+  <title>Field Occurrence</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/occurrence.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0d1117;
+      color: #00ffff;
+      padding: 20px;
+      margin:0;
+    }
+
+    h2, h3 { text-align:center; margin-bottom:15px; }
+
+    select, input, textarea, button {
+      padding:6px;
+      margin-top:5px;
+      border-radius:6px;
+      border:1px solid #00ffff;
+      background:#0d1117;
+      color:#00ffff;
+      font-size:14px;
+      width:100%;
+      box-sizing:border-box;
+    }
+
+    button {
+      cursor:pointer;
+      font-weight:bold;
+      margin-top:10px;
+      background:#00f0ff;
+      color:#001f2f;
+      border:none;
+    }
+    button:hover { box-shadow:0 0 8px #00ffff; }
+
+    #backBtn {
+      margin-bottom:15px;
+      padding:6px 12px;
+      border:none;
+      border-radius:6px;
+      background:#ff0044;
+      color:white;
+      font-weight:bold;
+      cursor:pointer;
+      width:auto;
+    }
+
+    .occurrence-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap:10px;
+    }
+
+    .occurrence-form label {
+      font-weight:bold;
+    }
+
+    .occurrence-list {
+      max-width: 1000px;
+      margin: 20px auto;
+      overflow-x:auto;
+    }
+
+    table {
+      width:100%;
+      border-collapse:collapse;
+      margin-top:10px;
+    }
+
+    table th, table td {
+      border:1px solid #00ffff;
+      padding:6px;
+      text-align:left;
+    }
+
+    table th {
+      background:#001f2f;
+    }
+
+    .action-btn {
+      padding:4px 8px;
+      border-radius:6px;
+      border:none;
+      cursor:pointer;
+      font-weight:bold;
+      margin-right:5px;
+    }
+
+    .edit-btn { background:#00ff44; color:#001f2f; }
+    .delete-btn { background:#ff0044; color:white; }
+
+    /* MODAL */
+    .modal {
+      display:none;
+      position:fixed;
+      top:0; left:0;
+      width:100vw;
+      height:100vh;
+      background: rgba(0,0,0,0.7);
+      z-index:1000;
+      justify-content:center;
+      align-items:center;
+      padding:10px;
+      box-sizing:border-box;
+    }
+    .modal.show { display:flex; }
+
+    .modal-content {
+      background:#001f2f;
+      color:#00ffff;
+      padding:20px;
+      border-radius:12px;
+      width:100%;
+      max-width:400px;
+      text-align:center;
+    }
+    .modal-actions {
+      display:flex;
+      justify-content:space-around;
+      margin-top:15px;
+      gap:10px;
+    }
+    .modal-actions button {
+      flex:1;
+      padding:10px;
+      border-radius:6px;
+      border:none;
+      font-weight:bold;
+      cursor:pointer;
+    }
+    #modalCancel { background:#333; color:#00ffff; }
+    #modalConfirm { background:#00ffff; color:#001f2f; }
+
+    .filters {
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    .filters select {
+      min-width:150px;
+    }
+
+    @media(max-width:600px){
+      .occurrence-form { max-width:100%; }
+      table th, table td { font-size:12px; padding:4px; }
+      #backBtn { width:100%; margin-bottom:10px; }
+    }
+  </style>
 </head>
+
 <body>
-<body>
 
-<!-- BACK BUTTON -->
-<button id="backBtn" style="
-  margin-bottom:15px;
-  padding:6px 12px;
-  border:none;
-  border-radius:6px;
-  background:#ff0044;
-  color:white;
-  font-weight:bold;
-  cursor:pointer;
-">← Back</button>
+  <!-- BACK BUTTON -->
+  <button id="backBtn">← Back</button>
 
-<h2>Field Occurrence Intelligence</h2>
+  <h2>Field Occurrence Intelligence</h2>
 
-<!-- FORM -->
-<form id="occurrenceForm">
-  <!-- form fields as before -->
-</form>
+  <!-- OCCURRENCE FORM -->
+  <form id="occurrenceForm" class="occurrence-form">
+    <label>Outlet</label>
+    <select id="occurrenceOutlet" required>
+      <option value="" disabled selected>Select Outlet</option>
+    </select>
 
-<hr>
+    <label>Product (Optional)</label>
+    <select id="occurrenceProduct">
+      <option value="">None</option>
+    </select>
 
-<h3>Occurrences</h3>
+    <label>Product Name</label>
+    <input type="text" id="productName" readonly>
 
-<div class="filters">
-  <select id="filterOutlet">
-    <option value="all">All Outlets</option>
-  </select>
+    <label>Product SKU</label>
+    <input type="text" id="productSKU" readonly>
 
-  <select id="filterStatus">
-    <option value="all">All Status</option>
-    <option value="Open">Open</option>
-    <option value="Resolved">Resolved</option>
-  </select>
-</div>
+    <label>Occurrence Type</label>
+    <input type="text" id="occurrenceTypeInput" placeholder="e.g., Out of Stock" required>
 
-<div id="occurrenceList"></div>
+    <label>Severity</label>
+    <select id="occurrenceSeverity">
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
+    </select>
 
-<script type="module" src="../js/occurrence.js"></script>
+    <label>Date</label>
+    <input type="date" id="occurrenceDate" required>
 
-<script>
-  // BACK BUTTON LOGIC
-  document.getElementById("backBtn").addEventListener("click", () => {
-    window.history.back(); // goes back to previous page
-  });
-</script>
-</body>
+    <label>Description</label>
+    <textarea id="occurrenceDescription" required></textarea>
 
-<h2>Field Occurrence Intelligence</h2>
+    <label>Action Taken</label>
+    <textarea id="occurrenceAction"></textarea>
 
-<!-- FORM -->
-<form id="occurrenceForm">
+    <label>Status</label>
+    <select id="occurrenceStatus">
+      <option value="Open">Open</option>
+      <option value="Resolved">Resolved</option>
+    </select>
 
-  <label>Outlet</label>
-  <select id="occurrenceOutlet" required>
-    <option value="" disabled selected>Select Outlet</option>
-  </select>
+    <input type="hidden" id="editOccurrenceId" value="">
+    <button type="submit" id="saveOccurrenceBtn">Save Occurrence</button>
+  </form>
 
-  <label>Product (Optional)</label>
-  <select id="occurrenceProduct">
-    <option value="">None</option>
-  </select>
+  <hr>
 
-  <label>Occurrence Type</label>
-  <select id="occurrenceType" required>
-    <optgroup label="Stock Issues">
-      <option value="Out of Stock">Out of Stock</option>
-      <option value="Low Stock">Low Stock</option>
-      <option value="Overstock">Overstock</option>
-      <option value="Damaged Product">Damaged Product</option>
-      <option value="Near Expiry Found">Near Expiry Found</option>
-    </optgroup>
+  <h3>Occurrences</h3>
 
-    <optgroup label="Outlet Issues">
-      <option value="Outlet Closed">Outlet Closed</option>
-      <option value="Outlet Refused Order">Outlet Refused Order</option>
-      <option value="Space Not Allocated">Space Not Allocated</option>
-    </optgroup>
+  <!-- FILTERS -->
+  <div class="filters">
+    <select id="filterOutlet">
+      <option value="all">All Outlets</option>
+    </select>
 
-    <optgroup label="Competitor Activity">
-      <option value="Competitor Promotion">Competitor Promotion</option>
-      <option value="Competitor Price Drop">Competitor Price Drop</option>
-      <option value="New Competitor Product">New Competitor Product</option>
-    </optgroup>
+    <select id="filterStatus">
+      <option value="all">All Status</option>
+      <option value="Open">Open</option>
+      <option value="Resolved">Resolved</option>
+    </select>
+  </div>
 
-    <optgroup label="Marketing Issues">
-      <option value="POS Missing">POS Material Missing</option>
-      <option value="Branding Damaged">Branding Damaged</option>
-      <option value="Display Removed">Display Removed</option>
-    </optgroup>
-  </select>
+  <!-- OCCURRENCE TABLE -->
+  <div class="occurrence-list">
+    <table id="occurrenceTable">
+      <thead>
+        <tr>
+          <th>Outlet</th>
+          <th>Product</th>
+          <th>Type</th>
+          <th>Severity</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Action</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
-  <label>Severity</label>
-  <select id="occurrenceSeverity">
-    <option value="Low">Low</option>
-    <option value="Medium">Medium</option>
-    <option value="High">High</option>
-  </select>
+  <!-- CONFIRM MODAL -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <p id="modalText"></p>
+      <div class="modal-actions">
+        <button id="modalCancel">Cancel</button>
+        <button id="modalConfirm">Confirm</button>
+      </div>
+    </div>
+  </div>
 
-  <label>Date</label>
-  <input type="date" id="occurrenceDate" required>
+  <!-- SCRIPTS -->
+  <script type="module" src="../js/occurrences.js"></script>
 
-  <label>Description</label>
-  <textarea id="occurrenceDescription" required></textarea>
-
-  <label>Action Taken</label>
-  <textarea id="occurrenceAction"></textarea>
-
-  <label>Status</label>
-  <select id="occurrenceStatus">
-    <option value="Open">Open</option>
-    <option value="Resolved">Resolved</option>
-  </select>
-
-  <button type="submit">Save Occurrence</button>
-</form>
-
-<hr>
-
-<h3>Occurrences</h3>
-
-<div class="filters">
-  <select id="filterOutlet">
-    <option value="all">All Outlets</option>
-  </select>
-
-  <select id="filterStatus">
-    <option value="all">All Status</option>
-    <option value="Open">Open</option>
-    <option value="Resolved">Resolved</option>
-  </select>
-</div>
-
-<div id="occurrenceList"></div>
-
-<script type="module" src="../js/occurrence.js"></script>
+  <script>
+    const backBtn = document.getElementById("backBtn");
+    backBtn.addEventListener("click", ()=>{
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        // fallback: redirect to homepage if no history
+        window.location.href = "index.html";
+      }
+    });
+  </script>
 
 </body>
 </html>
